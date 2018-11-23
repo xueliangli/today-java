@@ -28,5 +28,4 @@ public class UserController {
         response.getWriter().write(mapper.writeValueAsString(user));
         response.getWriter().close();
     }
-
 }
