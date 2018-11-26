@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<script>
+    function selectUser() {
+        var xml = new XMLHttpRequest();
+        xml.onreadystatechange = function () {
+            if (xml.readyState === 4 && xml.status === 200) {
+                document.getElementById("test").innerHTML = xml.responseText;
+            }
+        }
+        xml.open("POST", "user/showUser.do", true);
+        xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xml.send("id=1");
+
+        // $.ajax({
+        //     type: "POST",
+        //     url:'/user/showUser/',
+        //     contentType: "application/json;charset=utf-8",
+        //     dataType:'text',
+        //     data:JSON.stringify(json),
+        //     success:function(data){
+        //         warn_out("添加算法成功！");
+        //         Exit('AddAlg');
+        //     },
+        //     error:function(data){
+        //         warn_out("添加算法失败！");
+        //     }
+        // });
+    }
+</script>
+<body>
+<p id="test">Hello World!</p>
+<button type="button" onclick="selectUser()">onclick test</button>
+</body>
+</html>
