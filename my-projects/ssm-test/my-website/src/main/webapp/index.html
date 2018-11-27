@@ -15,25 +15,30 @@
         xml.open("POST", "user/showUser.do", true);
         xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xml.send("id=1");
-
-        // $.ajax({
-        //     type: "POST",
-        //     url:'/user/showUser/',
-        //     contentType: "application/json;charset=utf-8",
-        //     dataType:'text',
-        //     data:JSON.stringify(json),
-        //     success:function(data){
-        //         warn_out("添加算法成功！");
-        //         Exit('AddAlg');
-        //     },
-        //     error:function(data){
-        //         warn_out("添加算法失败！");
-        //     }
-        // });
     }
+
+    function toIndex() {
+        window.location.href="jsp/web-index.html";
+    }
+    // $.ajax({
+    //     type: "POST",
+    //     url:'/user/showUser/',
+    //     contentType: "application/json;charset=utf-8",
+    //     dataType:'text',
+    //     data:JSON.stringify(json),
+    //     success:function(data){
+    //         warn_out("添加算法成功！");
+    //         Exit('AddAlg');
+    //     },
+    //     error:function(data){
+    //         warn_out("添加算法失败！");
+    //     }
+    // });
 </script>
 <body>
 <p id="test">Hello World!</p>
-<button type="button" onclick="selectUser()">onclick test</button>
+<button type="button" onclick="selectUser()">取一条信息</button>
+
+<button type="button" onclick="toIndex()">跳转到首页</button>
 </body>
 </html>

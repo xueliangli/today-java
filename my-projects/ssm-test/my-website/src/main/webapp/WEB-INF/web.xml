@@ -7,25 +7,26 @@
     <display-name>my-website</display-name>
     <description>my-website_0.0.1</description>
 
-    <servlet>
-        <servlet-name>Log4JTestServlet</servlet-name>
-        <servlet-class>com.mucfc.Log4JTestServlet</servlet-class>
-    </servlet>
+    <!-- 测试log4j时的配置-->
+    <!--<servlet>-->
+        <!--<servlet-name>Log4JTestServlet</servlet-name>-->
+        <!--<servlet-class>com.mucfc.Log4JTestServlet</servlet-class>-->
+    <!--</servlet>-->
 
-    <!--用来启动 log4jConfigLocation的servlet -->
-    <servlet>
-        <servlet-name>Log4JInitServlet</servlet-name>
-        <servlet-class>com.mucfc.Log4JInitServlet</servlet-class>
-        <init-param>
-            <param-name>log4j-properties-location</param-name>
-            <param-value>/WEB-INF/classes/log4j.properties</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Log4JTestServlet</servlet-name>
-        <url-pattern>/test</url-pattern>
-    </servlet-mapping>
+    <!--&lt;!&ndash;用来启动 log4jConfigLocation的servlet &ndash;&gt;-->
+    <!--<servlet>-->
+        <!--<servlet-name>Log4JInitServlet</servlet-name>-->
+        <!--<servlet-class>com.mucfc.Log4JInitServlet</servlet-class>-->
+        <!--<init-param>-->
+            <!--<param-name>log4j-properties-location</param-name>-->
+            <!--<param-value>/WEB-INF/classes/log4j.properties</param-value>-->
+        <!--</init-param>-->
+        <!--<load-on-startup>1</load-on-startup>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>Log4JTestServlet</servlet-name>-->
+        <!--<url-pattern>/test</url-pattern>-->
+    <!--</servlet-mapping>-->
 
     <!-- 编码过滤器 -->
     <filter>
