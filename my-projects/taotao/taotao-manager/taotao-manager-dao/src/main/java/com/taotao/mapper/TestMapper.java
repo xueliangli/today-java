@@ -8,5 +8,5 @@ package com.taotao.mapper;
  * @version 1.0
  */
 public interface TestMapper {
-	public String queryNow();
+	String queryNow();
 }

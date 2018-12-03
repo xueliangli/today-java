@@ -1,13 +1,14 @@
 package com.taotao.service.impl;
 
-import org.springframework.stereotype.Service;
 import com.taotao.mapper.TestMapper;
 import com.taotao.service.TestService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 @Service
 public class TestServiceImpl implements TestService {
-	@Autowired
+	@Resource
 	private TestMapper mapper;
 	@Override
 	public String queryNow() {

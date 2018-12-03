@@ -1,10 +1,11 @@
 package com.taotao.controller;
 
 import com.taotao.service.TestService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.annotation.Resource;
 
 /**
  * 测试使用的controller 查询当前的时间
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 public class TestController {
-	@Autowired
+	@Resource
 	private TestService testservice;
 	
 	@RequestMapping("/test/qureyNow")
