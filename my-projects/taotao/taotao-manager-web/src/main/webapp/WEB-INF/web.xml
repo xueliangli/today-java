@@ -9,9 +9,9 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  <!-- 配置dispatcherservlet -->
+  <!-- 配置dispatcherServlet -->
   <!-- url的拦截形式 -->
-  <!-- 加载springmvc.xml -->
+  <!-- 加载springMVC.xml -->
   <!-- 解决post乱码 -->
   <filter>
     <filter-name>CharacterEncodingFilter</filter-name>
@@ -27,11 +27,11 @@
   </filter-mapping>
 
 
-  <!-- springmvc的前端控制器 -->
+  <!-- springMVC的前端控制器 -->
   <servlet>
     <servlet-name>taotao-manager-web</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-    <!-- contextConfigLocation不是必须的， 如果不配置contextConfigLocation， springmvc的配置文件默认在：WEB-INF/servlet的name+"-servlet.xml" -->
+    <!-- contextConfigLocation不是必须的， 如果不配置contextConfigLocation， springMvc的配置文件默认在：WEB-INF/servlet的name+"-servlet.xml" -->
     <init-param>
       <param-name>contextConfigLocation</param-name>
       <param-value>classpath:spring/springmvc.xml</param-value>
