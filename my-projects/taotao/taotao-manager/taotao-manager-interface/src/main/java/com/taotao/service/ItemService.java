@@ -14,8 +14,8 @@ public interface ItemService {
 	
 	/**
 	 *  根据当前的页码和每页 的行数进行分页查询
-	 * @param page
-	 * @param rows
+	 * @param page 页数
+	 * @param rows 每页的行数
 	 * @return
 	 */
 	EasyUIDataGridResult getItemList(Integer page, Integer rows);
