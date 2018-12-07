@@ -1,16 +1,15 @@
 package com.taotao.common.pojo;
 
 import java.io.Serializable;
-
-/*
+import java.util.List;
+/**
  * datagrid 展示数据的POJO 包括商品的POJO
  * @title EasyUIDataGridResult.java
  * <p>description</p>
  * <p>company: www.itheima.com</p>
- * @author ljh 
+ * @author ljh
  * @version 1.0
  */
-import java.util.List;
 
 public class EasyUIDataGridResult implements Serializable {
 	

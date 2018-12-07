@@ -18,6 +18,12 @@
             <version>1.2.17</version>
         </dependency>
 
+        <!-- content-interface -->
+        <dependency>
+            <groupId>com.taotao</groupId>
+            <artifactId>taotao-content-interface</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
         <!-- manager-interface接口 -->
         <dependency>
             <groupId>com.taotao</groupId>
@@ -97,6 +103,17 @@
         <dependency>
             <groupId>com.github.sgroschupf</groupId>
             <artifactId>zkclient</artifactId>
+        </dependency>
+        <!-- 图片服务器FSDFS的java客户端 -->
+        <dependency>
+            <groupId>fastdfs_client</groupId>
+            <artifactId>fastdfs_client</artifactId>
+            <version>1.25</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <build>
