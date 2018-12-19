@@ -7,9 +7,7 @@ import java.net.InetAddress;
 
 public class UdpReceiveDemo {
     public static void main(String[] args) throws IOException {
-
         method();
-
     }
 
     private static void method() throws IOException {

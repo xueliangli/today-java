@@ -57,7 +57,7 @@ public class Student {
         return sex;
     }
 
-    public void setSex(char sex) {
+    void setSex(char sex) {
         this.sex = sex;
     }
 
@@ -65,7 +65,7 @@ public class Student {
         return phoneNum;
     }
 
-    public void setPhoneNum(String phoneNum) {
+    void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
     }
 

@@ -12,8 +12,6 @@ package javase.concurrent;
  * C．实现同步是要很大的系统开销作为代价的，甚至可能造成死锁，所以尽量避免无谓的同步控制。
  *
  *************************************************************************/
-
-
 public class TestSync implements Runnable{
     private int b = 100;
 

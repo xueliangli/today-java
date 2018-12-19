@@ -1,6 +1,5 @@
 package javase.collections;
 
-import javase.utils.CollectionForUtil;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
@@ -15,13 +14,11 @@ class TestList {
         CollectionForUtil.iteratorMethod(studentList);
     }
 
-
     @Test
-    void testLinkedList(){
-        Collection<Student> students=StudentList.getStudentListLinked();
+    void testLinkedList() {
+        Collection<Student> students = StudentList.getStudentListLinked();
         CollectionForUtil.iteratorMethod(students);
     }
-
 
 
 }

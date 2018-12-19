@@ -17,7 +17,6 @@ public class TestThread extends Thread {
     private TestThread(String name){
         this.name=name;
     }
-
     /**
      * 重写 run 方法
      * 存放多线程代码的地方

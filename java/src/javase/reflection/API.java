@@ -1,7 +1,6 @@
 package javase.reflection;
 
 import javase.collections.Student;
-import javase.utils.ReflectionUtil;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Constructor;

@@ -1,6 +1,5 @@
 package javase.io;
 
-import javase.utils.IoTxtListConvertUtil;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -13,8 +12,8 @@ class testIo {
      * */
     @Test
     void testTxtListConvert() throws Exception {
-        String srcFile="././././src/main/resources/test-resource/sort-test-100000-words-sorted.txt";
-        String destFile="././././src/main/resources/test-resource/sort-test-100000-words-new.txt";
-        IoTxtListConvertUtil.getNewTxt(srcFile,destFile);
+        String srcFile="./././resources/test-resource/sort-test-100000-words-sorted.txt";
+        String destFile="./././resources/test-resource/sort-test-100000-words-new.txt";
+        UtilIoTxtListConvert.getNewTxt(srcFile,destFile);
     }
 }

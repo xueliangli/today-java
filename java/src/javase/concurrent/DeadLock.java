@@ -8,7 +8,7 @@ public class DeadLock implements Runnable {
 
     /**
      * 不加 sleep 方法的情况下也不会发生死锁，原因是：sleep是抱着锁睡觉，所以线程二获取不了对象 o1 的锁
-     * */
+     */
     @Override
     public void run() {
         System.out.println("flag : " + flag);
@@ -45,8 +45,8 @@ public class DeadLock implements Runnable {
     public static void main(String[] args) {
         DeadLock deadLock1 = new DeadLock();
         DeadLock deadLock2 = new DeadLock();
-        deadLock1.flag=0;
-        deadLock2.flag=1;
+        deadLock1.flag = 0;
+        deadLock2.flag = 1;
         //相当于创建了两个线程
         new Thread(deadLock1).start();
         new Thread(deadLock2).start();

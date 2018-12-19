@@ -1,6 +1,5 @@
 package javase.collections;
 
-import javase.utils.CollectionForUtil;
 import org.junit.jupiter.api.Test;
 
 import java.util.Set;
