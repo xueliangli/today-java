@@ -1,4 +1,4 @@
-package javase.io;
+package javase.io.utils;
 
 import java.io.BufferedWriter;
 import java.io.File;

@@ -1,4 +1,4 @@
-package javase.io;
+package javase.io.utils;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -8,8 +8,8 @@ import java.util.Collections;
  * 小工具：随机打乱一个TXT文本中的字符串并生成新的TXT文本
  *
  *************************************************************************/
-class UtilIoTxtListConvert {
-    static void getNewTxt(String srcFile, String destFile) throws Exception {
+public class UtilIoTxtListConvert {
+    public static void getNewTxt(String srcFile, String destFile) throws Exception {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(srcFile));
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(destFile));
 

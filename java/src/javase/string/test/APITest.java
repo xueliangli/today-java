@@ -1,4 +1,4 @@
-package javase.string;
+package javase.string.test;
 
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +8,7 @@ import java.util.Arrays;
  * char[] toCharArray()
  *           将此字符串转换为一个新的字符数组。
  * */
-class API {
+class APITest {
     private final String STR_1="abcddcbA";
     private final String STR_2="abcDDcba";
     private final String STR_3="as dasfa sfadf asefertf fgdh sdf s w";

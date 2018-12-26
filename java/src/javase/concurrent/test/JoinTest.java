@@ -1,4 +1,4 @@
-package javase.concurrent;
+package javase.concurrent.test;
 /*************************************************************************
  *
  * 探究join方法的作用:
@@ -40,9 +40,9 @@ package javase.concurrent;
  * 线程2 线程结束~
  * main 主线程结束~
  *************************************************************************/
-public class TestJoin extends Thread{
+public class JoinTest extends Thread{
     private String name;
-    private TestJoin(String name){
+    private JoinTest(String name){
         this.name=name;
     }
     public void run(){
@@ -60,8 +60,8 @@ public class TestJoin extends Thread{
 
     public static void main(String[] args) {
         System.out.println(Thread.currentThread().getName()+" 主线程开始~");
-        Thread th1 = new TestJoin("A");
-        Thread th2 = new TestJoin("B");
+        Thread th1 = new JoinTest("A");
+        Thread th2 = new JoinTest("B");
         th1.setName("线程1");
         th2.setName("线程2");
         th1.start();

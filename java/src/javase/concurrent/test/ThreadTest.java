@@ -1,4 +1,4 @@
-package javase.concurrent;
+package javase.concurrent.test;
 /*************************************************************************
  *
  * 通过继承 thread 类实现多线程
@@ -12,9 +12,9 @@ package javase.concurrent;
  * 实际上都会启动一个ＪＶＭ，每一个ｊＶＭ实际就是在操作系统中启动了一个进程。
  *
  *************************************************************************/
-public class TestThread extends Thread {
+public class ThreadTest extends Thread {
     private String name;
-    private TestThread(String name){
+    private ThreadTest(String name){
         this.name=name;
     }
     /**
@@ -34,8 +34,8 @@ public class TestThread extends Thread {
 
     public static void main(String[] args) {
         //通过调用 thread 类中的API
-        Thread th1 = new TestThread("A");
-        Thread th2 = new TestThread("B");
+        Thread th1 = new ThreadTest("A");
+        Thread th2 = new ThreadTest("B");
         th1.start();
         th2.start();
     }

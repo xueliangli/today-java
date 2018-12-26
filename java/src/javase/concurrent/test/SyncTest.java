@@ -1,4 +1,4 @@
-package javase.concurrent;
+package javase.concurrent.test;
 
 /*************************************************************************
  *
@@ -12,7 +12,7 @@ package javase.concurrent;
  * C．实现同步是要很大的系统开销作为代价的，甚至可能造成死锁，所以尽量避免无谓的同步控制。
  *
  *************************************************************************/
-public class TestSync implements Runnable{
+public class SyncTest implements Runnable{
     private int b = 100;
 
     //方法锁
@@ -38,7 +38,7 @@ public class TestSync implements Runnable{
     }
 
     public static void main(String[] args) throws Exception {
-        TestSync st = new TestSync();
+        SyncTest st = new SyncTest();
         Thread t = new Thread(st);
         t.start();
 

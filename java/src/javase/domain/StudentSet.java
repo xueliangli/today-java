@@ -1,11 +1,11 @@
-package javase.collections;
+package javase.domain;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
-class StudentMap {
-    static Map<Integer,Student> getStudentMap(){
-        Map<Integer, Student> studentMap = new HashMap<>();
+public class StudentSet {
+    public static Set<Student> getStudentSet(){
+        HashSet<Student> students=new HashSet<>();
         Student student1 = new Student();
         student1.setName("贾宝玉");
         student1.setAge(16);
@@ -36,19 +36,14 @@ class StudentMap {
         student5.setPhoneNum("0000-0000-0003");
         student5.setSex('女');
 
-        Student student6 = new Student();
-        student6.setName("袭人");
-        student6.setAge(18);
-        student6.setPhoneNum("0000-0000-0003");
-        student6.setSex('女');
+        students.add(student1);
+        students.add(student2);
+        students.add(student3);
+        students.add(student4);
+        students.add(student5);
 
-        studentMap.put(1,student1);
-        studentMap.put(2,student2);
-        studentMap.put(3,student3);
-        studentMap.put(4,student4);
-        studentMap.put(5,student5);
-        studentMap.put(6,student6);
-
-        return studentMap;
+        return students;
     }
+
+
 }

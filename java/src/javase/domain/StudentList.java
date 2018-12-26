@@ -1,11 +1,11 @@
-package javase.collections;
+package javase.domain;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-class StudentList {
-    static List<Student> getStudentList(){
+public class StudentList {
+    public static List<Student> getStudentList(){
         List<Student> studentList=new ArrayList<>();
         Student student1 = new Student();
         student1.setName("贾宝玉");
@@ -46,7 +46,7 @@ class StudentList {
         return studentList;
     }
 
-    static List<Student> getStudentListLinked(){
+    public static List<Student> getStudentListLinked(){
         List<Student> studentList=new LinkedList<>();
 
         Student student1 = new Student();

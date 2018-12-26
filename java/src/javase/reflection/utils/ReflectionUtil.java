@@ -1,4 +1,4 @@
-package javase.reflection;
+package javase.reflection.utils;
 
 import java.io.FileReader;
 import java.util.Properties;
@@ -11,7 +11,7 @@ public class ReflectionUtil {
         //配置文件对象
         Properties properties = new Properties();
         //输入流
-        FileReader in = new FileReader("reflection/ref.properties");
+        FileReader in = new FileReader("D:\\today-java\\java\\resources\\javase\\reflection\\ref.properties");
         //将流加载到配置文件对象
         properties.load(in);
         in.close();

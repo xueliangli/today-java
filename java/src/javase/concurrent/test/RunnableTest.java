@@ -1,11 +1,11 @@
-package javase.concurrent;
+package javase.concurrent.test;
 
 import static java.lang.Thread.sleep;
 
-public class TestRunnable implements Runnable {
+public class RunnableTest implements Runnable {
     private String name;
 
-    private TestRunnable(String name) {
+    private RunnableTest(String name) {
         this.name = name;
     }
 
@@ -23,7 +23,7 @@ public class TestRunnable implements Runnable {
 
     public static void main(String[] args) {
         //通过调用 thread 类中的API
-        new Thread(new TestRunnable("C")).start();
-        new Thread(new TestRunnable("D")).start();
+        new Thread(new RunnableTest("C")).start();
+        new Thread(new RunnableTest("D")).start();
     }
 }

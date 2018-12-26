@@ -1,6 +1,6 @@
-package javase.collections;
+package javase.collections.utils;
 
-import javase.collections.Student;
+import javase.domain.Student;
 
 import java.util.Collection;
 import java.util.Iterator;

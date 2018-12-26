@@ -1,10 +1,13 @@
-package javase.collections;
+package javase.collections.test;
 
+import javase.collections.utils.CollectionForUtil;
+import javase.domain.Student;
+import javase.domain.StudentList;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
 
-class TestList {
+class ListTest {
 
     @Test
     void testArrayList() {

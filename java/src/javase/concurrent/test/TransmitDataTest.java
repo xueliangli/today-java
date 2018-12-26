@@ -1,4 +1,4 @@
-package javase.concurrent;
+package javase.concurrent.test;
 
 import java.util.Random;
 /*************************************************************************
@@ -16,7 +16,7 @@ import java.util.Random;
  * 从这个例子可以看出，在返回value之前，必须要得到三个随机数。也就是说，这个 value是无法事先就传入线程类的。
  *
  *************************************************************************/
-public class TestTransmitData implements Runnable {
+public class TransmitDataTest implements Runnable {
 
     class Data {
         int value = 0;
@@ -47,7 +47,7 @@ public class TestTransmitData implements Runnable {
     }
 
     public static void main(String[] args) {
-        TestTransmitData thd = new TestTransmitData();
+        TransmitDataTest thd = new TransmitDataTest();
         new Thread(thd).start();
 
     }

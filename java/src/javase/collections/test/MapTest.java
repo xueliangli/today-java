@@ -1,10 +1,13 @@
-package javase.collections;
+package javase.collections.test;
 
+import javase.collections.utils.MapForUtil;
+import javase.domain.Student;
+import javase.domain.StudentMap;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 
-class TestMap {
+class MapTest {
 
     @Test
     void testHashMap(){

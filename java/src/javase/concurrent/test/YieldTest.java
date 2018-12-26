@@ -1,4 +1,4 @@
-package javase.concurrent;
+package javase.concurrent.test;
 /*************************************************************************
  *
  * sleep()和yield()的区别
@@ -7,8 +7,8 @@ package javase.concurrent;
  * yield()只是使当前线程重新回到可执行状态，所以执行yield()的线程有可能在进入到可执行状态后马上又被执行
  *
  *************************************************************************/
-public class TestYield extends Thread{
-    private TestYield(String name){
+public class YieldTest extends Thread{
+    private YieldTest(String name){
         super(name);
     }
 
@@ -30,8 +30,8 @@ public class TestYield extends Thread{
     }
 
     public static void main(String[] args) {
-        Thread th1 = new TestYield("张三");
-        Thread th2 = new TestYield("李四");
+        Thread th1 = new YieldTest("张三");
+        Thread th2 = new YieldTest("李四");
         th1.start();
         th2.start();
     }

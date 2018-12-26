@@ -1,4 +1,4 @@
-package javase.collections;
+package javase.domain;
 
 import java.util.Objects;
 
@@ -34,11 +34,11 @@ public class Student {
         System.out.println("姓名"+name+"年龄"+age+"手机号"+phoneNum);
     }
 
-    public String getName() {
-        return name;
+    public Student() {
     }
 
-    public Student() {
+    public String getName() {
+        return name;
     }
 
     public void setName(String name) {
@@ -57,7 +57,7 @@ public class Student {
         return sex;
     }
 
-    void setSex(char sex) {
+    public void setSex(char sex) {
         this.sex = sex;
     }
 
@@ -65,7 +65,7 @@ public class Student {
         return phoneNum;
     }
 
-    void setPhoneNum(String phoneNum) {
+    public void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
     }
 
