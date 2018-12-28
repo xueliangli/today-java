@@ -19,6 +19,4 @@ class MapTest {
 
         MapForUtil.entrySetMethod(studentMap);
     }
-
-
 }

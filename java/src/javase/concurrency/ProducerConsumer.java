@@ -1,4 +1,4 @@
-package javase.concurrent;
+package javase.concurrency;
 
 public class ProducerConsumer {
     public static void main(String[] args) {

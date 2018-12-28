@@ -1,5 +1,5 @@
 //: containers/CollectionDataGeneration.java
-// Using the Generators defined in the Arrays chapter.
+// Using the Generators defined in the Arrays chapter01.
 import java.util.*;
 import net.mindview.util.*;
 

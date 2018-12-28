@@ -1,4 +1,4 @@
-package javase.concurrent.test;
+package javase.concurrency.test;
 /*************************************************************************
  *
  * 通过继承 thread 类实现多线程

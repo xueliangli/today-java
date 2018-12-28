@@ -1,4 +1,4 @@
-package javase.concurrent.test;
+package javase.concurrency.test;
 /*************************************************************************
  *
  * 探究join方法的作用:

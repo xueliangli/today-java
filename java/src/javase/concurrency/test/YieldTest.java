@@ -1,4 +1,4 @@
-package javase.concurrent.test;
+package javase.concurrency.test;
 /*************************************************************************
  *
  * sleep()和yield()的区别

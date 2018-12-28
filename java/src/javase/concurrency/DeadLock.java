@@ -1,4 +1,4 @@
-package javase.concurrent;
+package javase.concurrency;
 
 public class DeadLock implements Runnable {
     private int flag;
