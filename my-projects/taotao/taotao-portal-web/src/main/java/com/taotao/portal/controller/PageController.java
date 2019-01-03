@@ -15,11 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PageController {
 	/**
 	 * 展示首页
-	 * @return
 	 */
 	//接收URL的请求http://localhost:8082/index.html
 	@RequestMapping("/index")
 	public String showIndex(){
-		return "index";//响应jsp
+		return "index";    //响应jsp
 	}
 }
