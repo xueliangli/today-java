@@ -215,7 +215,7 @@ class Tank {
      * */
     private boolean live=true;
 
-    public boolean isLive() {
+    boolean isLive() {
         return live;
     }
 

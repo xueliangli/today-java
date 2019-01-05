@@ -61,15 +61,21 @@ public class TankClient extends Frame {
 //    private int x = 50;
 //    private int y = 50;
     private Tank myTank = new Tank(40, 40, true,this);
-    private Tank enemyTank=new Tank(50,50,false,this);
+    private Tank enemyTank=new Tank(90,90,false,this);
     Missile m = null;
 
     @Override
     public void paint(Graphics g) {
         //坦克顶部显示炮弹数目
         g.drawString("missiles count: " + missiles.size(), 10, 50);
+
+        g.drawString("explodes count: " + missiles.size(), 10, 70);
         myTank.draw(g);
         enemyTank.draw(g);
+//        exp.draw(g);
+        for (Explode e :explodes) {
+            e.draw(g);
+        }
         /*
          * （十）按键打出炮弹
          */
@@ -166,4 +172,9 @@ public class TankClient extends Frame {
     /*
      * （十三）在坦克类中加入判断好坏坦克的变量
      */
+    /**
+     * 添加爆炸
+     * */
+//    private Explode exp=new Explode(70,70,this);
+    List<Explode> explodes=new ArrayList<>();
 }
