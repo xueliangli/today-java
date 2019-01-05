@@ -75,7 +75,6 @@ public class TankClient extends Frame {
         g.drawString("missiles count: " + missiles.size(), 10, 50);
         g.drawString("explodes count: " + explodes.size(), 10, 70);
         g.drawString("tanks count: " + tanks.size(), 10, 90);
-        myTank.draw(g);
 //        enemyTank.draw(g);
 //        exp.draw(g);
         for (Explode e : explodes) {
@@ -86,6 +85,9 @@ public class TankClient extends Frame {
          */
         for (Missile m : missiles) {
             m.hitTanks(tanks);
+            //不让子弹撞墙
+            m.hitWall(w1);
+            m.hitWall(w2);
             //自己可以被打
             m.hitTank(myTank);
             m.draw(g);
@@ -95,7 +97,9 @@ public class TankClient extends Frame {
         for (Tank t : tanks) {
             t.draw(g);
         }
-
+        myTank.draw(g);
+        w1.draw(g);
+        w2.draw(g);
     }
 
     /**
@@ -193,4 +197,9 @@ public class TankClient extends Frame {
      * 只需要一个,math random 产生的是小数
      * */
     static Random r=new Random();
+    /**
+     *(2.0)墙
+     * */
+    private Wall w1=new Wall(100,200,20,150,this);
+    private Wall w2=new Wall(300,100,300,20,this);
 }

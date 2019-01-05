@@ -18,7 +18,7 @@ class Tank {
     private static final int WIDTH = 30;
     private static final int HEIGHT = 30;
 
-    public boolean isGood() {
+    boolean isGood() {
         return good;
     }
 
@@ -153,7 +153,8 @@ class Tank {
             }
             //每移动一次，步骤减一个
             step--;
-            if (TankClient.r.nextInt(40) > 38) this.fire();
+            if (TankClient.r.nextInt(40) > 38)
+                this.fire();
         }
     }
 
@@ -192,7 +193,7 @@ class Tank {
                 //坦克要打出子弹，方法开火，有返回值，子弹
                 //第二次修改：每打出一发炮弹往容器里添加一发炮弹
                 //也可以写在fire里面
-                tc.missiles.add(fire());
+                fire();
                 break;
             case KeyEvent.VK_LEFT:
                 bL = false;
@@ -229,7 +230,8 @@ class Tank {
         int x = this.x + Tank.WIDTH / 2 - Missile.WIDTH / 2;
         int y = this.y + Tank.HEIGHT / 2 - Missile.HEIGHT / 2;
         //new 炮弹的时候需要把坦克的 tc 传给它
-        Missile m = new Missile(x, y, ptDir, this.tc);
+        Missile m = new Missile(x, y, good, ptDir, this.tc);
+        tc.missiles.add(m);
         return m;
     }
 
