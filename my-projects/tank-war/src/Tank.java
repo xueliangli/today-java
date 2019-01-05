@@ -44,7 +44,12 @@ class Tank {
     //让坦克自己画自己，外部不需要在关心坦克内部了
     void draw(Graphics g) {
         //如果为 false 则不画了
-        if (!live) return;
+        if (!live) {
+            if (!good){
+                tc.tanks.remove(this);
+            }
+            return;
+        }
         Color color = g.getColor();
         //区分敌我坦克
         if (good) g.setColor(Color.red);

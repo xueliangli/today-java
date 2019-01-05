@@ -7,11 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*************************************************************************
- * 标号模板：
- *（1）（2）（3）（4）（5）（6）（7）（8）
- *（Ⅰ）（Ⅱ）（Ⅲ）（Ⅳ）（Ⅴ）（Ⅵ）（Ⅶ）（Ⅷ）（Ⅸ）（Ⅹ）（Ⅺ）（Ⅻ）
- *（一）（二）（三）（四）（五）（六）（七）（八）（九）（十）
- *
  * 坦克类 ：客户端的窗口显示
  * author : 李学亮
  * date : 2018/12/25
@@ -33,7 +28,14 @@ public class TankClient extends Frame {
      * 1、可以关闭窗口
      * 2、不改变窗口大小
      */
+    private final int TANK_NUM=10;
+    private final int X_TANKS=50;
+    private final int Y_TANKS=50;
     private void launchFrame() {
+        //画窗口之前就可以把坦克放进去了
+        for (int i = 0; i < TANK_NUM; i++) {
+            tanks.add(new Tank(X_TANKS,Y_TANKS+50*i,false,this));
+        }
         //相对于屏幕的位置
         this.setLocation(400, 300);
         //窗口的长宽属性
@@ -61,17 +63,18 @@ public class TankClient extends Frame {
 //    private int x = 50;
 //    private int y = 50;
     private Tank myTank = new Tank(40, 40, true,this);
-    private Tank enemyTank=new Tank(90,90,false,this);
+//    private Tank enemyTank=new Tank(90,90,false,this);
+    List<Tank> tanks=new ArrayList<>();
     Missile m = null;
 
     @Override
     public void paint(Graphics g) {
         //坦克顶部显示炮弹数目
         g.drawString("missiles count: " + missiles.size(), 10, 50);
-
-        g.drawString("explodes count: " + missiles.size(), 10, 70);
+        g.drawString("explodes count: " + explodes.size(), 10, 70);
+        g.drawString("tanks count: " + tanks.size(), 10, 90);
         myTank.draw(g);
-        enemyTank.draw(g);
+//        enemyTank.draw(g);
 //        exp.draw(g);
         for (Explode e :explodes) {
             e.draw(g);
@@ -80,11 +83,15 @@ public class TankClient extends Frame {
          * （十）按键打出炮弹
          */
         for (Missile m : missiles) {
-            m.hitTank(enemyTank);
+            m.hitTanks(tanks);
             m.draw(g);
 //            if (!m.isLive()) missiles.remove(m);
 //            else m.draw(g);
         }
+        for (Tank t :tanks) {
+            t.draw(g);
+        }
+
     }
 
     /**

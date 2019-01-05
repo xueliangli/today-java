@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.List;
 
 class Missile {
     private int x, y;
@@ -92,7 +93,7 @@ class Missile {
         return new Rectangle(x,y,WIDTH,HEIGHT);
     }
 
-    boolean hitTank(Tank t){
+    private boolean hitTank(Tank t){
         //不加第二个判断条件则子弹会击中已经死了的坦克
         if (this.getRect().intersects(t.getRect())&&t.isLive()){
             t.setLive(false);
@@ -100,6 +101,14 @@ class Missile {
             Explode e=new Explode(x,y,tc);
             tc.explodes.add(e);
             return true;
+        }
+        return false;
+    }
+    boolean hitTanks(List<Tank> tanks){
+        for (Tank tank : tanks) {
+            if (hitTank(tank)) {
+                return true;
+            }
         }
         return false;
     }
