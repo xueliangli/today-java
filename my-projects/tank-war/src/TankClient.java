@@ -5,6 +5,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /*************************************************************************
  * 坦克类 ：客户端的窗口显示
@@ -28,13 +29,14 @@ public class TankClient extends Frame {
      * 1、可以关闭窗口
      * 2、不改变窗口大小
      */
-    private final int TANK_NUM=10;
-    private final int X_TANKS=50;
-    private final int Y_TANKS=50;
+    private final int TANK_NUM = 10;
+    private final int X_TANKS = 50;
+    private final int Y_TANKS = 50;
+
     private void launchFrame() {
         //画窗口之前就可以把坦克放进去了
         for (int i = 0; i < TANK_NUM; i++) {
-            tanks.add(new Tank(X_TANKS,Y_TANKS+50*i,false,this));
+            tanks.add(new Tank(X_TANKS, Y_TANKS + 50 * i, false, Tank.Direction.R, this));
         }
         //相对于屏幕的位置
         this.setLocation(400, 300);
@@ -62,9 +64,9 @@ public class TankClient extends Frame {
      */
 //    private int x = 50;
 //    private int y = 50;
-    private Tank myTank = new Tank(40, 40, true,this);
-//    private Tank enemyTank=new Tank(90,90,false,this);
-    List<Tank> tanks=new ArrayList<>();
+    private Tank myTank = new Tank(40, 40, true, Tank.Direction.STOP, this);
+    //    private Tank enemyTank=new Tank(90,90,false,this);
+    List<Tank> tanks = new ArrayList<>();
     Missile m = null;
 
     @Override
@@ -76,7 +78,7 @@ public class TankClient extends Frame {
         myTank.draw(g);
 //        enemyTank.draw(g);
 //        exp.draw(g);
-        for (Explode e :explodes) {
+        for (Explode e : explodes) {
             e.draw(g);
         }
         /*
@@ -84,11 +86,13 @@ public class TankClient extends Frame {
          */
         for (Missile m : missiles) {
             m.hitTanks(tanks);
+            //自己可以被打
+            m.hitTank(myTank);
             m.draw(g);
 //            if (!m.isLive()) missiles.remove(m);
 //            else m.draw(g);
         }
-        for (Tank t :tanks) {
+        for (Tank t : tanks) {
             t.draw(g);
         }
 
@@ -181,7 +185,12 @@ public class TankClient extends Frame {
      */
     /**
      * 添加爆炸
-     * */
+     */
 //    private Explode exp=new Explode(70,70,this);
-    List<Explode> explodes=new ArrayList<>();
+    List<Explode> explodes = new ArrayList<>();
+    /**
+     * (1.9)随机数产生器
+     * 只需要一个,math random 产生的是小数
+     * */
+    static Random r=new Random();
 }

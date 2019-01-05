@@ -8,11 +8,14 @@ class Missile {
     //子弹的长度高度
     static final int WIDTH = 10;
     static final int HEIGHT = 10;
+    //判断是好蛋还是坏蛋
+    private boolean good;
 
-    Missile(int x, int y, Tank.Direction dir) {
+    Missile(int x, int y, boolean good,Tank.Direction dir) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.good=good;
     }
 
     void draw(Graphics g) {
@@ -93,9 +96,9 @@ class Missile {
         return new Rectangle(x,y,WIDTH,HEIGHT);
     }
 
-    private boolean hitTank(Tank t){
+    boolean hitTank(Tank t){
         //不加第二个判断条件则子弹会击中已经死了的坦克
-        if (this.getRect().intersects(t.getRect())&&t.isLive()){
+        if (this.live&&this.getRect().intersects(t.getRect())&&t.isLive()&&this.good!=t.isGood()){
             t.setLive(false);
             this.live=false;
             Explode e=new Explode(x,y,tc);

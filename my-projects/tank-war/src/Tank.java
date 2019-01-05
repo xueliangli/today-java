@@ -17,8 +17,15 @@ class Tank {
     //坦克的长度高度
     private static final int WIDTH = 30;
     private static final int HEIGHT = 30;
+
+    public boolean isGood() {
+        return good;
+    }
+
     //判断坦克的所属势力
     private boolean good;
+    //定义坦克当前移动到哪一步了
+    private int step = TankClient.r.nextInt(12) + 3;
 
     //方向
     enum Direction {
@@ -33,19 +40,20 @@ class Tank {
     private Tank(int x, int y, boolean good) {
         this.x = x;
         this.y = y;
-        this.good=good;
+        this.good = good;
     }
 
-    Tank(int x, int y,boolean good, TankClient tc) {
-        this(x,y,good);
+    Tank(int x, int y, boolean good, Direction dir, TankClient tc) {
+        this(x, y, good);
         this.tc = tc;
+        this.dir = dir;
     }
 
     //让坦克自己画自己，外部不需要在关心坦克内部了
     void draw(Graphics g) {
         //如果为 false 则不画了
         if (!live) {
-            if (!good){
+            if (!good) {
                 tc.tanks.remove(this);
             }
             return;
@@ -125,17 +133,28 @@ class Tank {
                 break;
         }
         //坦克移动过后调整炮筒方法，让其随坦克移动而移动
-        if (this.dir!=Direction.STOP){
-            this.ptDir=this.dir;
+        if (this.dir != Direction.STOP) {
+            this.ptDir = this.dir;
         }
         /*
          * (十二) 坦克出街问题
          * */
-        if (x<0) x=0;
-        if (y<30) y=30;
-        if (x+Tank.WIDTH>TankClient.GAME_WIDTH) x=TankClient.GAME_WIDTH-Tank.WIDTH;
-        if (y+Tank.HEIGHT>TankClient.GAME_HEIGHT) y=TankClient.GAME_HEIGHT-Tank.HEIGHT;
+        if (x < 0) x = 0;
+        if (y < 30) y = 30;
+        if (x + Tank.WIDTH > TankClient.GAME_WIDTH) x = TankClient.GAME_WIDTH - Tank.WIDTH;
+        if (y + Tank.HEIGHT > TankClient.GAME_HEIGHT) y = TankClient.GAME_HEIGHT - Tank.HEIGHT;
 
+        if (!good) {
+            Direction[] dirs = Direction.values();
+            if (step == 0) {
+                step = TankClient.r.nextInt(12) + 3;
+                int rn = TankClient.r.nextInt(dirs.length);
+                dir = dirs[rn];
+            }
+            //每移动一次，步骤减一个
+            step--;
+            if (TankClient.r.nextInt(40) > 38) this.fire();
+        }
     }
 
     void keyPressed(KeyEvent e) {
@@ -205,20 +224,23 @@ class Tank {
     }
 
     private Missile fire() {
+        //被击败就别发子弹了
+        if (!live) return null;
         int x = this.x + Tank.WIDTH / 2 - Missile.WIDTH / 2;
         int y = this.y + Tank.HEIGHT / 2 - Missile.HEIGHT / 2;
         //new 炮弹的时候需要把坦克的 tc 传给它
-        Missile m = new Missile(x, y, ptDir,this.tc);
+        Missile m = new Missile(x, y, ptDir, this.tc);
         return m;
     }
 
-    Rectangle getRect(){
-        return new Rectangle(x,y,WIDTH,HEIGHT);
+    Rectangle getRect() {
+        return new Rectangle(x, y, WIDTH, HEIGHT);
     }
+
     /*
      * 定义布尔类型的量代表坦克是否存活
      * */
-    private boolean live=true;
+    private boolean live = true;
 
     boolean isLive() {
         return live;
