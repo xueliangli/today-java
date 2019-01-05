@@ -3,6 +3,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 /*************************************************************************
  * 标号模板：
@@ -58,16 +60,25 @@ public class TankClient extends Frame {
      */
 //    private int x = 50;
 //    private int y = 50;
-    private Tank myTank = new Tank(40, 40, this);
+    private Tank myTank = new Tank(40, 40, true,this);
+    private Tank enemyTank=new Tank(50,50,false,this);
     Missile m = null;
 
     @Override
     public void paint(Graphics g) {
+        //坦克顶部显示炮弹数目
+        g.drawString("missiles count: " + missiles.size(), 10, 50);
         myTank.draw(g);
+        enemyTank.draw(g);
         /*
          * （十）按键打出炮弹
          */
-        if (m != null) m.draw(g);
+        for (Missile m : missiles) {
+            m.hitTank(enemyTank);
+            m.draw(g);
+//            if (!m.isLive()) missiles.remove(m);
+//            else m.draw(g);
+        }
     }
 
     /**
@@ -118,8 +129,8 @@ public class TankClient extends Frame {
     /**
      * （六）代码重构：以后经常改动的量定义成常量
      */
-    private static final int GAME_WIDTH = 800;
-    private static final int GAME_HEIGHT = 600;
+    static final int GAME_WIDTH = 800;
+    static final int GAME_HEIGHT = 600;
 
     /**
      * （七）键盘控制坦克行动
@@ -140,4 +151,19 @@ public class TankClient extends Frame {
             myTank.keyReleased(e);
         }
     }
+
+    /**
+     * （十）能打出多发炮弹
+     * 在 paint 方法处修改
+     */
+    //因为循环画出这些炮弹，所以用ARRAY比较快，需要进行测试
+    List<Missile> missiles = new ArrayList<>();
+    /*
+     * （十一）解决炮弹不消失问题
+     * 设置一个变量表示炮弹是否有效
+     * 在子弹类中设置
+     */
+    /*
+     * （十三）在坦克类中加入判断好坏坦克的变量
+     */
 }

@@ -15,8 +15,10 @@ class Tank {
     private boolean bR = false;
     private boolean bD = false;
     //坦克的长度高度
-    private static final int WIDTH=30;
-    private static final int HEIGHT=30;
+    private static final int WIDTH = 30;
+    private static final int HEIGHT = 30;
+    //判断坦克的所属势力
+    private boolean good;
 
     //方向
     enum Direction {
@@ -24,28 +26,60 @@ class Tank {
     }
 
     private Direction dir = Direction.STOP;
+    //定义炮筒的方向
+    private Direction ptDir = Direction.D;
 
     //构造方法
-    Tank(int x, int y) {
+    private Tank(int x, int y, boolean good) {
         this.x = x;
         this.y = y;
+        this.good=good;
     }
 
-    Tank(int x, int y, TankClient tc) {
-        this.x = x;
-        this.y = y;
+    Tank(int x, int y,boolean good, TankClient tc) {
+        this(x,y,good);
         this.tc = tc;
     }
 
     //让坦克自己画自己，外部不需要在关心坦克内部了
     void draw(Graphics g) {
+        //如果为 false 则不画了
+        if (!live) return;
         Color color = g.getColor();
-        g.setColor(Color.red);
+        //区分敌我坦克
+        if (good) g.setColor(Color.red);
+        else g.setColor(Color.BLUE);
         g.fillOval(x, y, WIDTH, HEIGHT);
         g.setColor(color);
         //坐标怎么变化
 //        y += 3;
 //        x += 4;
+        switch (ptDir) {
+            case L:
+                g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x, y + Tank.HEIGHT / 2);
+                break;
+            case LU:
+                g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x, y);
+                break;
+            case LD:
+                g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x, y + Tank.HEIGHT);
+                break;
+            case R:
+                g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x + Tank.WIDTH, y + Tank.HEIGHT / 2);
+                break;
+            case RU:
+                g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x + Tank.WIDTH, y);
+                break;
+            case RD:
+                g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x + Tank.WIDTH, y + Tank.HEIGHT);
+                break;
+            case U:
+                g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x + Tank.WIDTH / 2, y);
+                break;
+            case D:
+                g.drawLine(x + Tank.WIDTH / 2, y + Tank.HEIGHT / 2, x + Tank.WIDTH / 2, y + Tank.HEIGHT);
+                break;
+        }
         move();
     }
 
@@ -85,16 +119,31 @@ class Tank {
             case STOP:
                 break;
         }
+        //坦克移动过后调整炮筒方法，让其随坦克移动而移动
+        if (this.dir!=Direction.STOP){
+            this.ptDir=this.dir;
+        }
+        /*
+         * (十二) 坦克出街问题
+         * */
+        if (x<0) x=0;
+        if (y<30) y=30;
+        if (x+Tank.WIDTH>TankClient.GAME_WIDTH) x=TankClient.GAME_WIDTH-Tank.WIDTH;
+        if (y+Tank.HEIGHT>TankClient.GAME_HEIGHT) y=TankClient.GAME_HEIGHT-Tank.HEIGHT;
+
     }
 
     void keyPressed(KeyEvent e) {
         //            测试:System.out.println("ok");
         int key = e.getExtendedKeyCode();
         switch (key) {
-            case KeyEvent.VK_CONTROL:
-                //坦克要打出子弹，方法开火，有返回值，子弹
-                tc.m=fire();
-                break;
+//            case KeyEvent.VK_CONTROL:
+//                //坦克要打出子弹，方法开火，有返回值，子弹
+//                //第二次修改：每打出一发炮弹往容器里添加一发炮弹
+//                //也可以写在fire里面
+//                tc.missiles.add(fire());
+//                break;
+            //为了防止炮弹密集，干脆键盘抬起时打出炮弹
             case KeyEvent.VK_LEFT:
                 bL = true;
                 break;
@@ -112,10 +161,15 @@ class Tank {
         locateDirection();
     }
 
-    void keyReleased(KeyEvent e){
+    void keyReleased(KeyEvent e) {
         int key = e.getExtendedKeyCode();
         switch (key) {
-
+            case KeyEvent.VK_CONTROL:
+                //坦克要打出子弹，方法开火，有返回值，子弹
+                //第二次修改：每打出一发炮弹往容器里添加一发炮弹
+                //也可以写在fire里面
+                tc.missiles.add(fire());
+                break;
             case KeyEvent.VK_LEFT:
                 bL = false;
                 break;
@@ -132,6 +186,7 @@ class Tank {
         //重新定位方向
         locateDirection();
     }
+
     private void locateDirection() {
         if (bL && !bU && !bR && !bD) dir = Direction.L;
         if (!bL && !bU && bR && !bD) dir = Direction.R;
@@ -143,10 +198,28 @@ class Tank {
         if (!bL && !bU && bR && bD) dir = Direction.RD;
         if (!bL && !bU && !bR && !bD) dir = Direction.STOP;
     }
-    private Missile fire(){
-        int x=this.x+Tank.WIDTH/2-Missile.WIDTH/2;
-        int y=this.y+Tank.HEIGHT/2-Missile.HEIGHT/2;
-        Missile m=new Missile(x,y,dir);
+
+    private Missile fire() {
+        int x = this.x + Tank.WIDTH / 2 - Missile.WIDTH / 2;
+        int y = this.y + Tank.HEIGHT / 2 - Missile.HEIGHT / 2;
+        //new 炮弹的时候需要把坦克的 tc 传给它
+        Missile m = new Missile(x, y, ptDir,this.tc);
         return m;
+    }
+
+    Rectangle getRect(){
+        return new Rectangle(x,y,WIDTH,HEIGHT);
+    }
+    /*
+     * 定义布尔类型的量代表坦克是否存活
+     * */
+    private boolean live=true;
+
+    public boolean isLive() {
+        return live;
+    }
+
+    void setLive(boolean live) {
+        this.live = live;
     }
 }
