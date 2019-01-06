@@ -68,13 +68,22 @@ public class TankClient extends Frame {
     //    private Tank enemyTank=new Tank(90,90,false,this);
     List<Tank> tanks = new ArrayList<>();
     Missile m = null;
+    //画出血块
+    Blood b = new Blood();
 
     @Override
     public void paint(Graphics g) {
+        //敌人死光后再加入一批
+        if (tanks.size() <= 0) {
+            for (int i = 0; i < TANK_NUM - 5; i++) {
+                tanks.add(new Tank(X_TANKS, Y_TANKS + 50 * i, false, Tank.Direction.R, this));
+            }
+        }
         //坦克顶部显示炮弹数目
         g.drawString("missiles count: " + missiles.size(), 10, 50);
         g.drawString("explodes count: " + explodes.size(), 10, 70);
         g.drawString("tanks count: " + tanks.size(), 10, 90);
+        g.drawString("tanks life: " + myTank.getLife(), 10, 110);
 //        enemyTank.draw(g);
 //        exp.draw(g);
         for (Explode e : explodes) {
@@ -97,11 +106,14 @@ public class TankClient extends Frame {
         for (Tank t : tanks) {
             t.collidesWithWall(w1);
             t.collidesWithWall(w2);
+            t.collidesWithTanks(tanks);
             t.draw(g);
         }
         myTank.draw(g);
+        myTank.eat(b);
         w1.draw(g);
         w2.draw(g);
+        b.draw(g);
     }
 
     /**
@@ -197,11 +209,11 @@ public class TankClient extends Frame {
     /**
      * (1.9)随机数产生器
      * 只需要一个,math random 产生的是小数
-     * */
-    static Random r=new Random();
+     */
+    static Random r = new Random();
     /**
-     *(2.0)墙
-     * */
-    private Wall w1=new Wall(100,200,20,150,this);
-    private Wall w2=new Wall(300,100,300,20,this);
+     * (2.0)墙
+     */
+    private Wall w1 = new Wall(100, 200, 20, 150, this);
+    private Wall w2 = new Wall(300, 100, 300, 20, this);
 }

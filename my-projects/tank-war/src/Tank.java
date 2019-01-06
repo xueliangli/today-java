@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.List;
 
 /**
  * （八）添加100辆坦克
@@ -19,6 +20,19 @@ class Tank {
     //坦克的长度高度
     private static final int WIDTH = 30;
     private static final int HEIGHT = 30;
+    //血条
+    private BloodBar bb = new BloodBar();
+
+    int getLife() {
+        return life;
+    }
+
+    public void setLife(int life) {
+        this.life = life;
+    }
+
+    //生命值
+    private int life = 100;
 
     boolean isGood() {
         return good;
@@ -55,6 +69,8 @@ class Tank {
 
     //让坦克自己画自己，外部不需要在关心坦克内部了
     void draw(Graphics g) {
+        if (isGood() && isLive())
+            bb.draw(g);
         //如果为 false 则不画了
         if (!live) {
             if (!good) {
@@ -102,10 +118,10 @@ class Tank {
 
     /**
      * 撞墙就回到上一步的位置
-     * */
+     */
     private void stay() {
-        x=oldX;
-        y=oldY;
+        x = oldX;
+        y = oldY;
     }
 
     private void move() {
@@ -196,6 +212,12 @@ class Tank {
             case KeyEvent.VK_DOWN:
                 bD = true;
                 break;
+            case KeyEvent.VK_F2:
+                if (!this.live) {
+                    this.live = true;
+                    this.life=100;
+                }
+                break;
         }
         //重新定位方向
         locateDirection();
@@ -221,6 +243,9 @@ class Tank {
                 break;
             case KeyEvent.VK_DOWN:
                 bD = false;
+                break;
+            case KeyEvent.VK_A:
+                superFire();
                 break;
         }
         //重新定位方向
@@ -250,6 +275,17 @@ class Tank {
         return m;
     }
 
+    private Missile fire(Direction dir) {
+        //被击败就别发子弹了
+        if (!live) return null;
+        int x = this.x + Tank.WIDTH / 2 - Missile.WIDTH / 2;
+        int y = this.y + Tank.HEIGHT / 2 - Missile.HEIGHT / 2;
+        //new 炮弹的时候需要把坦克的 tc 传给它
+        Missile m = new Missile(x, y, good, dir, this.tc);
+        tc.missiles.add(m);
+        return m;
+    }
+
     Rectangle getRect() {
         return new Rectangle(x, y, WIDTH, HEIGHT);
     }
@@ -274,6 +310,59 @@ class Tank {
         if (this.live && this.getRect().intersects(w.getRect())) {
 //            this.dir = Direction.STOP;
             this.stay();
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 坦克不能互相穿越
+     */
+    boolean collidesWithTanks(List<Tank> tanks) {
+        for (Tank t : tanks) {
+            if (this != t) {
+                if (t.isLive() && this.live && this.getRect().intersects(t.getRect())) {
+                    this.stay();
+                    t.stay();
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 超级炮弹
+     */
+    private void superFire() {
+        Direction[] dirs = Direction.values();
+        for (int i = 0; i < 8; i++) {
+            fire(dirs[i]);
+        }
+    }
+
+    /**
+     * 坦克顶部显示血条,用定义的内部类表示
+     * 小血条视为坦克的一部分，又比较独立
+     */
+    private class BloodBar {
+        public void draw(Graphics g) {
+            Color color = g.getColor();
+            g.setColor(Color.RED);
+            g.drawRect(x, y - 10, WIDTH, 10);
+            int w = WIDTH * life / 100;
+            g.fillRect(x, y - 10, w, 10);
+            g.setColor(color);
+        }
+    }
+
+    /**
+     * 吃血块后坦克达到满血,和碰撞本质相同
+     */
+    public boolean eat(Blood b) {
+        if (this.live && b.isLive() && this.getRect().intersects(b.getRect())) {
+            this.life = 100;
+            b.setLive(false);
             return true;
         }
         return false;
