@@ -7,6 +7,8 @@ import java.awt.event.KeyEvent;
  */
 class Tank {
     private int x, y;
+    //上一步的位置,记录移动前的位置
+    private int oldX, oldY;
 
     private TankClient tc;
     //判断四个按键是否按下
@@ -40,6 +42,8 @@ class Tank {
     private Tank(int x, int y, boolean good) {
         this.x = x;
         this.y = y;
+        this.oldX = x;
+        this.oldY = y;
         this.good = good;
     }
 
@@ -96,7 +100,18 @@ class Tank {
         move();
     }
 
+    /**
+     * 撞墙就回到上一步的位置
+     * */
+    private void stay() {
+        x=oldX;
+        y=oldY;
+    }
+
     private void move() {
+        //撞墙前移动之前记录，上一步坦克所在的位置
+        this.oldX = x;
+        this.oldY = y;
         //步进值
         int X = 5;
         int Y = 5;
@@ -250,5 +265,17 @@ class Tank {
 
     void setLive(boolean live) {
         this.live = live;
+    }
+
+    /**
+     * 坦克不能穿过墙
+     */
+    boolean collidesWithWall(Wall w) {
+        if (this.live && this.getRect().intersects(w.getRect())) {
+//            this.dir = Direction.STOP;
+            this.stay();
+            return true;
+        }
+        return false;
     }
 }
